@@ -1,25 +1,34 @@
 
 public class RecursiveSearcher {
-	
-	public int RecursiveSearcher() {
 
-	public int doBinarySearch(IntegerArray arrayOfInts, int target) {
-		 return dobinarySearch(target, 0, arrayOfInts.length()-1);
-	}
-	}
-	private int dobinarySearch(Object target, int lo, int hi){
-		   if(lo > hi) {
-		      return -1;
-		   } else {
-		      int mid = (lo+hi)/2;
-		      int comp = vec[mid].compareTo(target);
-		      if(comp == 0){
-		          return mid;
-		      } else if(comp < 0){
-		          return dobinarySearch(target, mid+1, hi);
-		      } else {
-		          return dobinarySearch(target, lo, mid-1);
-		   }
+
+		int doBinarySearch(IntegerArray arrayOfInts, int target) {
+			return doBinarySearch(arrayOfInts, target, 0, arrayOfInts.length()-1);
 		}
-}
+		
+		int doBinarySearch(IntegerArray arrayOfInts1, int target1, int start, int end){
+	
+			int middle = (start + end)/2;
+	
+			if(end < start){
+				return -1;
+			} 
+	
+	
+			if (target1 < arrayOfInts1.read(middle)){
+				return doBinarySearch(arrayOfInts1, target1, start, middle - 1);
+			}
+	
+			if (target1 > arrayOfInts1.read(middle)){
+				return doBinarySearch(arrayOfInts1, target1, middle + 1, end);
+			}
+	
+			if (target1 == arrayOfInts1.read(middle)) {
+				return middle;
+			}
+	
+			return -1;
+		}
 	}
+
+
