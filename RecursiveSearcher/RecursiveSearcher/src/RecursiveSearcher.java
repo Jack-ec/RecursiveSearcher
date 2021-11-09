@@ -2,33 +2,36 @@
 public class RecursiveSearcher {
 
 
-		int doBinarySearch(IntegerArray arrayOfInts, int target) {
-			return doBinarySearch(arrayOfInts, target, 0, arrayOfInts.length()-1);
+		int doBinarySearch(IntegerArray arrayToSearch, int target) {
+			return doBinarySearch(arrayToSearch, target, 0, arrayToSearch.length()-1);
 		}
 		
-		int doBinarySearch(IntegerArray arrayOfInts1, int target1, int start, int end){
+		private int doBinarySearch(IntegerArray arrayToSearch, int target, int start, int end){
 	
-			int middle = (start + end)/2;
 	
-			if(end < start){
+			if(start > end){
 				return -1;
 			} 
+			int middle = start + (end - start)/2;
+			int value = arrayToSearch.read(middle);
 	
 	
-			if (target1 < arrayOfInts1.read(middle)){
-				return doBinarySearch(arrayOfInts1, target1, start, middle - 1);
+			if (target == value) {
+				int temp = middle;
+				
+				while(--middle >= 0 && arrayToSearch.read(middle) == target) {
+					temp = middle;
+				}
+				return temp;
+			} 
+			else if (target < value){
+				return doBinarySearch(arrayToSearch, target, start, middle - 1);
 			}
 	
-			if (target1 > arrayOfInts1.read(middle)){
-				return doBinarySearch(arrayOfInts1, target1, middle + 1, end);
+			else {
+				return doBinarySearch(arrayToSearch, target, middle + 1, end);
 			}
-	
-			if (target1 == arrayOfInts1.read(middle)) {
-				return middle;
-			}
-	
-			return -1;
-		}
 	}
+}
 
 
